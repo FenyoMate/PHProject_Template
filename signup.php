@@ -74,7 +74,7 @@ debug_to_console($_POST);
         <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
 
-    <a href="login.php">Already have an account? Log in here</a>
+    <a href="index.php">Already have an account? Log in here</a>
 </section>
 
 

@@ -1,15 +1,9 @@
 <?php
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     session_start();
-
-    $con = mysqli_connect('localhost', 'root');
-
-    if ($con) {
-        debug_to_console("Connection successful");
-    } else {
-        debug_to_console("No DB connection");
-
-    }
+    $con = mysqli_connect('localhost', 'root', '', 'tempdb');
 
     mysqli_select_db($con, 'tempdb');
     $email = $_POST['email'];
@@ -26,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('location:index.php');
         }
     }
+    header('location:index.php');
 }
 
 ?>
