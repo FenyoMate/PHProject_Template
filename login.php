@@ -1,18 +1,18 @@
 <?php
-
+include 'scripts.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     session_start();
-    
+
     $con = mysqli_connect('localhost', 'root');
 
-    if($con){
-        echo "Connection successful";
-    }else{
-        echo "No DB connection";
+    if ($con) {
+        debug_to_console("Connection successful");
+    } else {
+        debug_to_console("No DB connection");
 
     }
 
     mysqli_select_db($con, 'tempdb');
-
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -25,17 +25,17 @@
         if ($num == 1) {
             $_SESSION['email'] = $email;
             header('location:index.php');
-        } else {
-            header('location:signup_page.php');
         }
     }
+}
 
-    ?>
+?>
 <section class="my-4">
     <form action="login.php" method="post">
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                   placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
