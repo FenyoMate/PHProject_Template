@@ -1,4 +1,5 @@
 <?php
+
     session_start();
     
     $con = mysqli_connect('localhost', 'root');
@@ -25,11 +26,24 @@
             $_SESSION['email'] = $email;
             header('location:index.php');
         } else {
-            header('location:signup.php');
+            header('location:signup_page.php');
         }
     }
 
     ?>
-
+<section class="my-4">
+    <form action="login.php" method="post">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+</section>
 
 
