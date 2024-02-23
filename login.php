@@ -1,11 +1,11 @@
 <?php
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    include 'dbcon.php';
     session_start();
-    $con = mysqli_connect('localhost', 'root', '', 'tempdb');
+    $con = dbConnection();
 
-    mysqli_select_db($con, 'tempdb');
+    mysqli_select_db($con, 'forumdb');
     $email = $_POST['email'];
     $password = $_POST['password'];
 

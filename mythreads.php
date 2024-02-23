@@ -1,9 +1,9 @@
 <?php
 session_start();
-
+include 'dbcon.php';
 function get_user_id($email)
 {
-    $con = mysqli_connect('localhost', 'root', '', 'tempdb');
+    $con = dbConnection();
     $query = "SELECT id FROM users WHERE email = '$email'";
     $result = mysqli_query($con, $query);
     if ($result) {
@@ -14,18 +14,9 @@ function get_user_id($email)
     }
 };
 
-
-
 include 'navbar.php';
-include 'scripts.php';
 
-$con = mysqli_connect('localhost', 'root', '', 'tempdb');
-
-if ($con) {
-    debug_to_console("Connection successful");
-} else {
-    debug_to_console("No DB connection");
-}
+$con = dbConnection();
 
 if(isset($_POST['deleteItem']) and is_numeric($_POST['deleteItem']))
 {
@@ -55,7 +46,6 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['title']) && ($_POST['cont
 
 }
 
-
 ?>
 
 <div class="container">
@@ -66,7 +56,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['title']) && ($_POST['cont
                 <?php
 
                 if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SESSION['email']) {
-                    $query = "SELECT * FROM threads";
+                    $query = "SELECT * FROM threads WHERE created_by = " . get_user_id($_SESSION['email']) . " ORDER BY id DESC;";
                     $result = mysqli_query($con, $query);
                     if ($result) {
                         echo '';

@@ -1,9 +1,8 @@
 <?php
-include 'scripts.php';
+include 'dbcon.php';
 debug_to_console("TESZT");
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $con = mysqli_connect('localhost', 'root', '', 'tempdb') or die("Connection failed: " . mysqli_connect_error());
-        debug_to_console("Sikeresen csatlakozott az adatbázishoz");
+        $con = dbConnection();
         if(isset($_POST['email']) && isset($_POST['password'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
