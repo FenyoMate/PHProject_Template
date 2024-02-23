@@ -21,14 +21,27 @@ $con = dbConnection();
 if(isset($_POST['deleteItem']) and is_numeric($_POST['deleteItem']))
 {
     $id = $_POST['deleteItem'];
-    $query = "DELETE FROM threads WHERE id = $id";
+
+    //Delete comments first
+    $query = "DELETE FROM comments WHERE thread_id = $id";
     $result = mysqli_query($con, $query);
-    if ($result) {
-        debug_to_console("Sikeresen lefutott a query!");
-        header('location:mythreads.php');
-    } else {
+
+    //Delete thread
+    if($result)
+    {
+        $query = "DELETE FROM threads WHERE id = $id";
+        $result = mysqli_query($con, $query);
+        if ($result) {
+            debug_to_console("Sikeresen lefutott a query!");
+            header('location:mythreads.php');
+        } else {
+            debug_to_console("Sikertelen a query lefutása!");
+        };
+    }
+    else
+    {
         debug_to_console("Sikertelen a query lefutása!");
-    };
+    }
 }
 
 if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['title']) && ($_POST['content'])) {
@@ -61,15 +74,19 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['title']) && ($_POST['cont
                     if ($result) {
                         echo '';
                         while ($row = mysqli_fetch_assoc($result)) {
+                            $sql = "SELECT COUNT(*) AS answers FROM comments WHERE thread_id = " . $row['id'];
+                            $result2 = mysqli_query($con, $sql);
+                            $row2 = mysqli_fetch_assoc($result2);
                             echo '
                             <form action="mythreads.php" method="post">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">' . $row['title'] . '
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="thread.php?thread_id=' . $row['id'] . '">' . $row['title'] . '</a>
                                 <button type="submit" class="badge badge-secondary badge-danger" name="deleteItem" value="'.$row['id'].'" />Delete</button>
-                                <span class="badge badge-primary badge-pill">14</span> 
+                                <span class="badge badge-primary badge-pill">'. $row2['answers'] .'</span> 
                             </li>
                             </form>
                             ';
-                        };//TODO answer tábla+counter erre a részre
+                        };
                     } else {
                         echo "No threads found!";
                     }

@@ -6,6 +6,10 @@ Contains:<br>
 <li>Database connection</li>
 <li>Session handling</li>
 <li>Form handling</li>
+</ul>
+Run with XAMPP or similar. <br>
+Will be added soon: <br>
+<ul>
 <li>File handling</li>
 <li>Image handling</li>
 <li>Mail handling</li>
@@ -15,4 +19,3 @@ Contains:<br>
 <li>Localization</li>
 <li>Security</li>
 </ul>
-Run with XAMPP or similar. <br>
