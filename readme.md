@@ -16,6 +16,5 @@ Will be added soon: <br>
 <li>Cookie handling</li>
 <li>Validation</li>
 <li>Logging</li>
-<li>Localization</li>
 <li>Security</li>
 </ul>

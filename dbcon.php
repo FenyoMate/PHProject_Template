@@ -1,5 +1,7 @@
 <?php
 include 'scripts.php';
+
+//Database connection any error will be logged to the console
 function dbConnection()
 {
     try {
@@ -13,6 +15,7 @@ function dbConnection()
         }
     } catch (Exception $e) {
         debug_to_console("Exception: " . $e->getMessage());
+        return null;
     }
 }
 

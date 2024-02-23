@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'dbcon.php';
+include_once 'dbcon.php';
 function get_user_id($email)
 {
     $con = dbConnection();
@@ -14,7 +14,7 @@ function get_user_id($email)
     }
 };
 
-include 'navbar.php';
+include_once 'navbar.php';
 
 $con = dbConnection();
 
@@ -105,7 +105,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && ($_POST['title']) && ($_POST['cont
                 </div>
                 <div class="form-group">
                     <label for="content">Content:</label>
-                    <textarea type="textarea" class="form-control" id="content" name="content" rows="3"></textarea>
+                    <textarea class="form-control" id="content" name="content" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
